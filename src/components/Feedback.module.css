@@ -1,3 +1,11 @@
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    font-size: 40px;
+    color: #010101;
+}
+
 .btn {
     display: inline-block;
     cursor: pointer;
