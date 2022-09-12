@@ -9,16 +9,41 @@ export default class Feedback extends Component{
         bad: 0,
     }
 
+    leaveFeedback = (propName) => {
+        this.setState((prevState) => {
+            const value = prevState[propName];
+            return {
+                [propName]: value + 1,
+            }
+        })        
+    }
+
+    countTotalFeedback = () => {
+        const { good, neutral, bad } = this.state;
+        return good + neutral + bad;
+    }
+
+    countPositiveFeedbackPercentage = () => {
+        const { good } = this.state;
+        const total = this.countTotalFeedback();
+        if (!total) {
+            return 0;
+        }
+        const percentage = Number((good / total) * 100).toFixed(0);
+        return percentage;        
+    }
 
     render() {
         const { good, neutral, bad } = this.state;
+        const total = this.countTotalFeedback();
+        const positivePercentage = this.countPositiveFeedbackPercentage();
         return (
             <div>
                 <div>
                     <h2>Please leave feedback</h2>
-                    <button className={styles.btn}>Good</button>
-                    <button className={styles.btn}>Neutral</button>
-                    <button className={styles.btn}>Bad</button>
+                    <button className={styles.btn} onClick={() => { this.leaveFeedback("good") }}>Good</button>
+                    <button className={styles.btn} onClick={() => { this.leaveFeedback("neutral") }}>Neutral</button>
+                    <button className={styles.btn} onClick={() => { this.leaveFeedback("bad") }}>Bad</button>
                 </div>
                 <div>
                     <h2>Statistics</h2>
@@ -26,8 +51,8 @@ export default class Feedback extends Component{
                         <li>Good: {good}</li>
                         <li>Neutral: {neutral}</li>
                         <li>Bad: {bad}</li>
-                        <li>Total:</li>
-                        <li>Positive feedback:</li>
+                        <li>Total: {total}</li>
+                        <li>Positive feedback: {positivePercentage} %</li>
                     </ul>
                 </div>
             </div>
