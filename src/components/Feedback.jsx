@@ -1,5 +1,9 @@
 import styles from "./Feedback.module.css";
 import { Component } from "react";
+import Section from "./Section";
+import Statistics from "./Statistics";
+import FeedbackOptions from "./FeedbackOptions";
+import Notification from "./Notification";
 
 export default class Feedback extends Component{
     
@@ -39,22 +43,22 @@ export default class Feedback extends Component{
         const positivePercentage = this.countPositiveFeedbackPercentage();
         return (
             <div>
-                <div>
-                    <h2>Please leave feedback</h2>
-                    <button className={styles.btn} onClick={() => { this.leaveFeedback("good") }}>Good</button>
-                    <button className={styles.btn} onClick={() => { this.leaveFeedback("neutral") }}>Neutral</button>
-                    <button className={styles.btn} onClick={() => { this.leaveFeedback("bad") }}>Bad</button>
-                </div>
-                <div>
-                    <h2>Statistics</h2>
-                    <ul>
-                        <li>Good: {good}</li>
-                        <li>Neutral: {neutral}</li>
-                        <li>Bad: {bad}</li>
-                        <li>Total: {total}</li>
-                        <li>Positive feedback: {positivePercentage} %</li>
-                    </ul>
-                </div>
+                <Section title="Please leave feedback">
+                    <FeedbackOptions leaveFeedback={this.leaveFeedback}/>
+                </Section>
+                <Section title="Statistics">
+                    {!total
+                        ? <Notification message="There is no feedback" />
+                        : <Statistics
+                        good={good}
+                        neutral={neutral}
+                        bad={bad}
+                        total={total}
+                        positivePercentage={positivePercentage}
+                        />
+                    }                    
+                </Section>
+
             </div>
         )
     }

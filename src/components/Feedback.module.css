@@ -9,3 +9,13 @@
     background-color: #fff;
     font-size: 24px;
 }
+
+.btn:hover{
+    background-color: black;
+    color: white;
+    transition: 250ms;
+}
+
+.list{
+    list-style: none;
+}
