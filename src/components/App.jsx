@@ -12,14 +12,12 @@ export class App extends Component{
         bad: 0,
     }
 
-    leaveFeedback = (propName) => {
-        this.setState((prevState) => {
-            const value = prevState[propName];
-            return {
-                [propName]: value + 1,
-            }
-        })        
-    }
+	leaveFeedback = (e) => {
+		const name = e.target.name;
+		this.setState((prevState) => ({
+			[name]: prevState[name] + 1
+		}));
+	};
 
     countTotalFeedback = () => {
         const { good, neutral, bad } = this.state;
@@ -38,12 +36,13 @@ export class App extends Component{
 
     render() {
         const { good, neutral, bad } = this.state;
+        const options = Object.keys(this.state)
         const total = this.countTotalFeedback();
         const positivePercentage = this.countPositiveFeedbackPercentage();
         return (
             <div className={styles.wrapper}>
                 <Section title="Please leave feedback">
-                    <FeedbackOptions leaveFeedback={this.leaveFeedback}/>
+                    <FeedbackOptions options={options} leaveFeedback={this.leaveFeedback}/>
                 </Section>
                 <Section title="Statistics">
                     {!total

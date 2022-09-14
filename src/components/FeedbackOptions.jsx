@@ -1,13 +1,17 @@
+import React from 'react';
 import styles from "./Feedback.module.css";
+import shortid from "shortid";
 
-const FeedbackOptions = ({leaveFeedback}) => {
-    return (
-        <>
-            <button className={styles.btn} onClick={() => leaveFeedback("good")}>Good</button>
-            <button className={styles.btn} onClick={() => leaveFeedback("neutral")}>Neutral</button>
-            <button className={styles.btn} onClick={() => leaveFeedback("bad")}>Bad</button>
-        </>
-    )
-}
+const FeedbackOptions = ({ options, leaveFeedback }) => {
+	return (
+		<>
+            {options.map((option) => {
+                return <button key={shortid.generate()} type="button" className={styles.btn} name={option} onClick={leaveFeedback}>
+                    {option}
+                </button>
+            })}
+		</>
+	);
+};
 
 export default FeedbackOptions;
