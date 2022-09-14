@@ -1,5 +1,6 @@
+import PropTypes from 'prop-types';
 import React from 'react';
-import styles from "./Feedback.module.css";
+import styles from "../FeedbackOptions/FeedbackOptions.module.css";
 import shortid from "shortid";
 
 const FeedbackOptions = ({ options, leaveFeedback }) => {
@@ -15,3 +16,8 @@ const FeedbackOptions = ({ options, leaveFeedback }) => {
 };
 
 export default FeedbackOptions;
+
+FeedbackOptions.propTypes = {
+    options: PropTypes.arrayOf(PropTypes.string).isRequired,
+    leaveFeedback: PropTypes.func.isRequired
+}
