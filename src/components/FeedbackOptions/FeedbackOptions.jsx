@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import styles from "../FeedbackOptions/FeedbackOptions.module.css";
-import shortid from "shortid";
+
 
 const FeedbackOptions = ({ options, leaveFeedback }) => {
 	return (
 		<>
             {options.map((option) => {
-                return <button key={shortid.generate()} type="button" className={styles.btn} name={option} onClick={leaveFeedback}>
+                return <button key={option} type="button" className={styles.btn} name={option} onClick={leaveFeedback}>
                     {option}
                 </button>
             })}
